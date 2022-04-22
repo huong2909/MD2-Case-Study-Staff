@@ -55,7 +55,7 @@ public class MenuUSER {
                 }
                 break;
             case 4:
-                staffView.phanLoai();
+                staffView.getWorkingType();
                 break;
             case 5:
                 new UserView().showListUserLogin();

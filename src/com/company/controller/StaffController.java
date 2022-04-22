@@ -1,5 +1,7 @@
 package com.company.controller;
 
+import com.company.model.FullTimeStaff;
+import com.company.model.PartTimeStaff;
 import com.company.model.Staff;
 import com.company.service.Staff.StaffServiceIMPL;
 
@@ -33,20 +35,23 @@ public class StaffController {
     public void editStatus(int id){
         staffServiceIMPL.editStatus(id);
     }
-    public void phanLoai(String workingType){
-        staffServiceIMPL.phanloai(workingType);
+    public void getWorkingType(String workingType){
+        staffServiceIMPL.getWorkingType(workingType);
     }
 
-    public List<Staff> showListSalaryFull()  {
+    public List<FullTimeStaff> showListSalaryFull()  {
         return staffServiceIMPL.findSalary();
     }
-    public void createSalaryFull(Staff staff)  {
-        staffServiceIMPL.saveSalaryFull(staff);
+    public void createSalaryFull(FullTimeStaff fullTimeStaff)  {
+        staffServiceIMPL.saveSalaryFull(fullTimeStaff);
     }
-    public List<Staff> showListSalaryPart()  {
+    public List<PartTimeStaff> showListSalaryPart()  {
         return  staffServiceIMPL.findSalaryPart();
     }
-    public void createSalaryPart(Staff staff)  {
-        staffServiceIMPL.saveSalaryPart(staff);
+    public void createSalaryPart(PartTimeStaff partTimeStaff)  {
+        staffServiceIMPL.saveSalaryPart(partTimeStaff);
+    }
+    public void setUpSalaryFull(int id, int bonus, int fine, int hardSalary){
+        staffServiceIMPL.setUpSalaryFull(id,bonus,fine,hardSalary);
     }
 }

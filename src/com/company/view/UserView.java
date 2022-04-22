@@ -28,14 +28,18 @@ public class UserView {
             } else {
                 id = userList.get(userList.size() - 1).getId() + 1;
             }
-            System.out.println("Nhập tên");
+            System.out.println("Nhập họ tên( 8 chữ cái trở lên, chữ in hoa và không dấu cách)");
             String name;
-            do {
+            boolean checkName;
+            while (true) {
                 name = scanner.nextLine();
-                if (name == null) {
-                    System.err.println("Không được để trống!! Vui lòng nhập lại");
+                checkName = Pattern.matches("[A-Z0-9_-]{8,}", name);
+                if (!checkName) {
+                    System.err.println("Sai rồi!vui lòng nhập lại!");
+                } else {
+                    break;
                 }
-            } while (name == null);
+            }
 
 
             System.out.println("Nhập tên người dùng (tối thiểu 6 ký tự)");

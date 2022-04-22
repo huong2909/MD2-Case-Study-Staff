@@ -3,7 +3,7 @@ package com.company.model;
 public class PartTimeStaff extends Staff{
     private int hoursWork;
     public double getSalary(){
-        return hoursWork*100;
+        return hoursWork*50;
     }
 
     public PartTimeStaff(int id, String name,int age,String country, String status, String workingType,int hoursWork) {

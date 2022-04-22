@@ -9,26 +9,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class StaffView {
     Scanner scanner = new Scanner(System.in);
     List<Staff> staffList = StaffServiceIMPL.staffList;
+    List<FullTimeStaff> staffList1 = StaffServiceIMPL.staffList1;
     StaffController staffController = new StaffController();
     List<User> userListLogin = UserServiceIMPL.userListLogin;
     StaffServiceIMPL staffServiceIMPL = new StaffServiceIMPL();
     public void showListStaff() {
         System.out.println(staffController.showListStaff());
-        System.out.println("Nhập quit để quay lại Menu");
-        String backMenu = scanner.nextLine();
-        if (backMenu.equalsIgnoreCase("quit")) {
-            for (int i = 0; i < userListLogin.size(); i++) {
-                if (Role.RoleName.ADMIN.equals(userListLogin.get(i).getRoleName())) {
-                    new MenuADMIN();
-                } else {
-                    new MenuUSER();
-                }
-            }
-        }
+        new MenuADMIN();
+
     }
 
     public void formCreateStaff() {
@@ -39,68 +32,86 @@ public class StaffView {
             } else {
                 id = staffList.get(staffList.size() - 1).getId() + 1;
             }
-            System.out.println("Nhập tên nhân viên ");
-            String name = scanner.nextLine();
-            System.out.println("Tuổi nhân viên ");
-            int age = Integer.parseInt(scanner.nextLine());
-            System.out.println("Nhập quê quán ");
-            String country = scanner.nextLine();
-            System.out.println("Chọn trạng thái làm việc ");
-            System.out.println("1.Đang làm việc" + "\n" +
-                    "2.Nghỉ việc");
-            String status = scanner.nextLine();
-            switch (status) {
-                case "1":
-                    status = "Đang làm việc";
-                    break;
-                case "2":
-                    status = "Nghỉ việc";
-                    break;
-            }
-            System.out.println("Nhập hình thức làm việc");
-            System.out.println("1.Parttime" + "\n" +
-                    "2.Fulltime");
-            String workingType = scanner.nextLine();
-            switch (workingType) {
-                case "1":
-                    workingType = "Parttime";
-                    break;
-                case "2":
-                    workingType = "Fulltime";
-                    break;
-            }
-            Staff staff = new Staff(id, name, age, country, status, workingType);
-            staffController.createStaff(staff);
 
-            System.out.println("Nhập phím bất kỳ để tiếp tục hoặc nhập quit để quay lại Menu");
-            String backMenu = scanner.nextLine();
-            if (backMenu.equalsIgnoreCase("quit")) {
-                for (int i = 0; i < userListLogin.size(); i++) {
-                    if (Role.RoleName.ADMIN.equals(userListLogin.get(i).getRoleName())) {
-                        new MenuADMIN();
-                    } else {
-                        new MenuUSER();
+            //Tên
+            System.out.println("Nhập họ và tên nhân viên");
+            String name;
+            boolean checkName;
+            while (true) {
+                name = scanner.nextLine();
+                checkName = Pattern.matches("(.|\\s)*\\S(.|\\s)*", name);
+                if (!checkName) {
+                    System.err.println("Không được để trống!! Vui lòng nhập lại");
+                } else {
+                    break;
+                }
+            }
+            //Tuổi
+            System.out.println("Nhập tuổi nhân viên ");
+            int age = Integer.parseInt(scanner.nextLine());
+
+            //quê
+            System.out.println("Nhập quê quán ");
+            String country;
+            boolean checkCountry;
+            while (true) {
+                country = scanner.nextLine();
+                checkCountry = Pattern.matches("(.|\\s)*\\S(.|\\s)*", country);
+                if (!checkCountry) {
+                    System.err.println("Không được để trống!! Vui lòng nhập lại");
+                } else {
+                    break;
+                }
+            }
+            //hinh thức
+            String status = "Đang làm việc";
+            System.out.println("Nhập hình thức làm việc");
+            System.out.println("1. Parttime" + "\n" +
+                    "2. Fulltime");
+            String workingType;
+            boolean checkWorkingType;
+            while (true) {
+                workingType = scanner.nextLine();
+                switch (workingType) {
+                    case "1":
+                        workingType = "Parttime";
+                        break;
+                    case "2":
+                        workingType = "Fulltime";
+                        break;
+                }
+                checkWorkingType = Pattern.matches("Parttime|Fulltime", workingType);
+                if (!checkWorkingType) {
+                    System.err.println("Nhập sai!! Vui lòng nhập lại");
+                } else {
+                    break;
+                }
+            }
+                Staff staff = new Staff(id, name, age, country, status, workingType);
+                staffController.createStaff(staff);
+            System.out.println("Thêm nhân viên thành công!!!");
+
+                System.out.println("Nhập phím bất kỳ để tiếp tục thêm hoặc nhập quit để quay lại Menu");
+                String backMenu = scanner.nextLine();
+                if (backMenu.equalsIgnoreCase("quit")) {
+                    for (int i = 0; i < userListLogin.size(); i++) {
+                        if (Role.RoleName.ADMIN.equals(userListLogin.get(i).getRoleName())) {
+                            new MenuADMIN();
+                        } else {
+                            new MenuUSER();
+                        }
                     }
                 }
             }
         }
-    }
+
 
     public void deleteStaff() {
         System.out.println("Nhập ID của nhân viên cần xóa");
         int id = Integer.parseInt(scanner.nextLine());
         staffController.deleteStaff(id);
-        System.out.println("nhập quit để quay lại Menu");
-        String backMenu = scanner.nextLine();
-        if (backMenu.equalsIgnoreCase("quit")) {
-            for (int i = 0; i < userListLogin.size(); i++) {
-                if (Role.RoleName.ADMIN.equals(userListLogin.get(i).getRoleName())) {
-                    new MenuADMIN();
-                } else {
-                    new MenuUSER();
-                }
-            }
-        }
+        staffController.showListStaff();
+        new MenuADMIN();
     }
 
     public void checkStatusByName() {
@@ -121,17 +132,7 @@ public class StaffView {
         }
         if (check == false) {
             System.err.println("ID không tồn tại");
-            System.out.println("Nhập quit để quay lại Menu");
-            String backMenu = scanner.nextLine();
-            if (backMenu.equalsIgnoreCase("quit")) {
-                for (int i = 0; i < userListLogin.size(); i++) {
-                    if (Role.RoleName.ADMIN.equals(userListLogin.get(i).getRoleName())) {
-                        new MenuADMIN();
-                    } else {
-                        new MenuUSER();
-                    }
-                }
-            }
+            new MenuADMIN();
         }
 
 
@@ -263,18 +264,18 @@ public class StaffView {
         }
     }
 
-    public void phanLoai() {
+    public void getWorkingType() {
         System.out.println("1.Fulltime" + "\n" +
                 "2.Parttime");
         String choose2 = scanner.nextLine();
         switch (choose2) {
             case "1":
                 choose2 = "Fulltime";
-                staffController.phanLoai(choose2);
+                staffController.getWorkingType(choose2);
                 break;
             case "2":
                 choose2 = "Parttime";
-                staffController.phanLoai(choose2);
+                staffController.getWorkingType(choose2);
                 break;
         }
         System.out.println("Nhập quit để quay lại Menu");
@@ -295,11 +296,9 @@ public class StaffView {
     public void salaryFull() {
         for (int i = 0; i < staffList.size(); i++) {
             if (staffList.get(i).getWorkingType().equalsIgnoreCase("FullTime") && staffList.get(i).getStatus().equalsIgnoreCase("đang làm việc")) {
-                System.out.println("Nhập tiền thưởng của nhân viên " + staffList.get(i).getName());
-                int bonus = scanner.nextInt();
-                System.out.println("Nhập tiền phạt của nhân viên " + staffList.get(i).getName());
+                System.out.println("Nhập số ngày nghỉ của nhân viên " + staffList.get(i).getName());
                 int fine = scanner.nextInt();
-                FullTimeStaff fullTimeStaff = new FullTimeStaff(staffList.get(i).getId(), staffList.get(i).getName(), staffList.get(i).getAge(), staffList.get(i).getCountry(), staffList.get(i).getStatus(), staffList.get(i).getWorkingType(), bonus, fine, 10000);
+                FullTimeStaff fullTimeStaff = new FullTimeStaff(staffList.get(i).getId(), staffList.get(i).getName(), staffList.get(i).getAge(), staffList.get(i).getCountry(), staffList.get(i).getStatus(), staffList.get(i).getWorkingType(), 1000, fine, 10000);
 
                 staffController.createSalaryFull(fullTimeStaff);
                 System.out.println(staffController.showListSalaryFull());
@@ -310,17 +309,7 @@ public class StaffView {
 
     public void showListSalaryFull() {
         System.out.println(staffController.showListSalaryFull());
-        System.out.println("Nhập quit để quay lại");
-        String backMenu = scanner.nextLine();
-        if (backMenu.equalsIgnoreCase("quit")) {
-            for (int i = 0; i < userListLogin.size(); i++) {
-                if (Role.RoleName.ADMIN.equals(userListLogin.get(i).getRoleName())) {
-                    new MenuADMIN();
-                } else {
-                    new MenuUSER();
-                }
-            }
-        }
+        new MenuADMIN();
 
     }
 
@@ -339,20 +328,31 @@ public class StaffView {
 
     public void showListSalaryPart() {
         System.out.println(staffController.showListSalaryPart());
-        System.out.println("Nhập quit để quay lại");
-        String backMenu = scanner.nextLine();
-        if (backMenu.equalsIgnoreCase("quit")) {
-            for (int i = 0; i < userListLogin.size(); i++) {
-                if (Role.RoleName.ADMIN.equals(userListLogin.get(i).getRoleName())) {
-                    new MenuADMIN();
-                } else {
-                    new MenuUSER();
-                }
-            }
-        }
+        new MenuADMIN();
 
     }
     public void setupSalary(){
+        System.out.println(staffController.showListSalaryFull());
+        System.out.println("Nhập Id của nhân viên:");
+        int id = Integer.parseInt(scanner.nextLine());
+        boolean check = false;
+        for (int i = 0; i < staffList1.size(); i++) {
+            if (id == staffList1.get(i).getId()) {
+                check = true;
+            }
+        }
+        if (check == false) {
+            System.err.println("ID không tồn tại");
+            new MenuADMIN();
+        }
+        System.out.println("Nhập tiền thưởng:");
+        int bonus = scanner.nextInt();
+        System.out.println("Nhập số ngày nghỉ:");
+        int fine = scanner.nextInt();
+        System.out.println("Nhập lương cứng:");
+        int salary = scanner.nextInt();
+        staffController.setUpSalaryFull(id,bonus,fine,salary);
+        System.out.println(staffController.showListSalaryFull());
     }
 }
 

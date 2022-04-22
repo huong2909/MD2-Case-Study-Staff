@@ -1,5 +1,7 @@
 package com.company.service.Staff;
 
+import com.company.model.FullTimeStaff;
+import com.company.model.PartTimeStaff;
 import com.company.model.Staff;
 import com.company.service.IServiceGeneric;
 
@@ -16,14 +18,14 @@ public interface IStaffService extends IServiceGeneric<Staff> {
 
     void editStatus(int id);
 
-    void phanloai(String workingType);
+    void getWorkingType(String workingType);
 
-    void saveSalaryFull(Staff staff) ;
+    void saveSalaryFull(FullTimeStaff fullTimeStaff) ;
 
-    List<Staff> findSalary() ;
+    List<FullTimeStaff> findSalary() ;
 
-    void saveSalaryPart(Staff staff) ;
+    void saveSalaryPart(PartTimeStaff partTimeStaff) ;
 
-    List<Staff> findSalaryPart() ;
-    void setUpSalaryFull(int id, String name,int age,String country, String status, String workingType,int bonus, int fine, int hardSalary);
+    List<PartTimeStaff> findSalaryPart() ;
+    void setUpSalaryFull(int id, int bonus, int fine, int hardSalary);
     }

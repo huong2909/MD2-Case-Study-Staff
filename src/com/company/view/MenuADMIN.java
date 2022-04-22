@@ -70,7 +70,7 @@ public class MenuADMIN {
                         }
                         break;
                     case "7":
-                        staffView.phanLoai();
+                        staffView.getWorkingType();
                         break;
                     case "8":
 
@@ -78,6 +78,7 @@ public class MenuADMIN {
                         System.out.println("2.Tính lương nhân viên Parttime");
                         System.out.println("3.Hiển thị lương nhân viên FullTime");
                         System.out.println("4.Hiển thị lương nhân viên PartTime");
+                        System.out.println("5.Chỉnh sửa lương Fulltime");
 
                         String choose3 = scanner.nextLine();
                         switch (choose3){
@@ -95,11 +96,18 @@ public class MenuADMIN {
                                 System.out.println("===========================PartTime======================");
                                 staffView.showListSalaryPart();
                                 break;
+                            case "5":
+                                staffView.setupSalary();
+                                break;
                             default:
                                 System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
                                 new MenuADMIN();
 
                         }
+                    default:
+                        System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
+                        new MenuADMIN();
+
                 }
             case "2":
                 System.out.println("=====================USER MANAGER====================");

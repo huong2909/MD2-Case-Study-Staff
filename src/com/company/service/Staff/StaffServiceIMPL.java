@@ -1,6 +1,8 @@
 package com.company.service.Staff;
 
 import com.company.config.ConfigReadAndWriteFile;
+import com.company.model.FullTimeStaff;
+import com.company.model.PartTimeStaff;
 import com.company.model.Staff;
 import com.company.view.MenuADMIN;
 
@@ -12,10 +14,10 @@ public class StaffServiceIMPL implements IStaffService{
     public static List<Staff> staffList = new ConfigReadAndWriteFile<Staff>().readFromFile(PATH);
 
     public static String PATH1 = "D:\\MD2-Case Study-Staff\\src\\com\\company\\data\\salary.txt";
-    public static List<Staff> staffList1 = new ConfigReadAndWriteFile<Staff>().readFromFile(PATH1);
+    public static List<FullTimeStaff> staffList1 = new ConfigReadAndWriteFile<FullTimeStaff>().readFromFile(PATH1);
 
     public static String PATH2 = "D:\\MD2-Case Study-Staff\\src\\com\\company\\data\\SalaryPart.txt";
-    public static List<Staff> staffList2 = new ConfigReadAndWriteFile<Staff>().readFromFile(PATH2);
+    public static List<PartTimeStaff> staffList2 = new ConfigReadAndWriteFile<PartTimeStaff>().readFromFile(PATH2);
     @Override
     public List<Staff> findAll()  {
         new ConfigReadAndWriteFile<Staff>().writeToFile(PATH,staffList);
@@ -32,20 +34,37 @@ public class StaffServiceIMPL implements IStaffService{
         String checkName = null;
         for (int i = 0; i < staffList.size(); i++) {
             if (id==staffList.get(i).getId()){
+//                if (id==staffList2.get(i).getId()){
+//                    staffList2.remove(i);
+//                    findSalary();
+//                } else if (id==staffList1.get(i).getId()){
+//                    staffList1.remove(i);
+//                    findSalaryPart();
+//                }
                 staffList.remove(i);
                 System.out.println("Đã xóa thành công!!!");
                 findAll();
-                new MenuADMIN();
+
             }
+
+        }
+
+
+        for (int i = 0; i < staffList1.size(); i++) {
             if (id==staffList1.get(i).getId()){
                 staffList1.remove(i);
-            }
-            if (id==staffList2.get(i).getId()){
-                staffList2.remove(i);
+                findSalary();
             }
         }
+        for (int i = 0; i < staffList2.size(); i++) {
+            if (id==staffList2.get(i).getId()){
+                staffList2.remove(i);
+                findSalaryPart();
+            }
+        } new MenuADMIN();
         if (checkName==null)
             System.err.println("ID sai hoặc không tồn tại");
+
     }
     @Override
     public void checkStatusByName(String name) {
@@ -114,7 +133,7 @@ public class StaffServiceIMPL implements IStaffService{
     }
 
     @Override
-    public void phanloai(String workingType) {
+    public void getWorkingType(String workingType) {
         for (int i = 0; i < staffList.size(); i++) {
             if (workingType.equalsIgnoreCase(staffList.get(i).getWorkingType())){
                 System.out.println(staffList.get(i));
@@ -123,39 +142,37 @@ public class StaffServiceIMPL implements IStaffService{
     }
 
     @Override
-    public void saveSalaryFull(Staff staff)  {
-        staffList1.add(staff);
-        new ConfigReadAndWriteFile<Staff>().writeToFile(PATH1,staffList1);;
+    public void saveSalaryFull(FullTimeStaff fullTimeStaff)  {
+        staffList1.add(fullTimeStaff);
+        new ConfigReadAndWriteFile<FullTimeStaff>().writeToFile(PATH1,staffList1);;
     }
 
     @Override
-    public List<Staff> findSalary()  {
-        new ConfigReadAndWriteFile<Staff>().writeToFile(PATH1,staffList1);
+    public List<FullTimeStaff> findSalary()  {
+        new ConfigReadAndWriteFile<FullTimeStaff>().writeToFile(PATH1,staffList1);
         return staffList1;
     }
 
     @Override
-    public void saveSalaryPart(Staff staff)  {
-       staffList2.add(staff);
-       new ConfigReadAndWriteFile<Staff>().writeToFile(PATH2,staffList2);
+    public void saveSalaryPart(PartTimeStaff partTimeStaff)  {
+       staffList2.add(partTimeStaff);
+       new ConfigReadAndWriteFile<PartTimeStaff>().writeToFile(PATH2,staffList2);
     }
 
     @Override
-    public List<Staff> findSalaryPart() {
-       new ConfigReadAndWriteFile<Staff>().writeToFile(PATH2,staffList2);
+    public List<PartTimeStaff> findSalaryPart() {
+       new ConfigReadAndWriteFile<PartTimeStaff>().writeToFile(PATH2,staffList2);
        return staffList2;
     }
 
     @Override
-    public void setUpSalaryFull(int id, String name, int age, String country, String status, String workingType, int bonus, int fine, int hardSalary) {
+    public void setUpSalaryFull(int id, int bonus, int fine, int hardSalary) {
         for (int i = 0; i < staffList1.size(); i++) {
             if (id == staffList1.get(i).getId()){
-                staffList1.get(i).setName(name);
-                staffList1.get(i).setAge(age);
-                staffList1.get(i).setCountry(country);
-                staffList1.get(i).setWorkingType(workingType);
-                staffList1.get(i).setStatus(status);
-
+                staffList1.get(i).setBonus(bonus);
+                staffList1.get(i).setFine(fine);
+                staffList1.get(i).setHardSalary(hardSalary);
+                findSalary();
             }
         }
     }

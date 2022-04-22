@@ -2,18 +2,18 @@ package com.company.model;
 
 public class FullTimeStaff extends Staff{
     private int bonus;
-    private int fine;
+    private int dayOff;
     private int  hardSalary;
 
 
-    public FullTimeStaff(int id, String name, int age, String country, String status, String workingType, int bonus, int fine, int hardSalary) {
+    public FullTimeStaff(int id, String name, int age, String country, String status, String workingType, int bonus, int dayOff, int hardSalary) {
         super(id, name, age, country, status, workingType);
         this.bonus = bonus;
-        this.fine = fine;
+        this.dayOff = dayOff;
         this.hardSalary = hardSalary;
     }
     public double getSalary(){
-        return hardSalary+(bonus-fine);
+        return hardSalary+(bonus-(dayOff*300));
     }
 
     public int getBonus() {
@@ -25,11 +25,11 @@ public class FullTimeStaff extends Staff{
     }
 
     public int getFine() {
-        return fine;
+        return dayOff;
     }
 
     public void setFine(int fine) {
-        this.fine = fine;
+        this.dayOff = fine;
     }
 
     public int getHardSalary() {
@@ -42,7 +42,7 @@ public class FullTimeStaff extends Staff{
 
     @Override
     public String toString() {
-        return String.format("\tID: %1s || Name: %15s || Bonus: %4s || Fine: %4s || HardSalary: %6s || totalSalary: %6s \n",super.getId(),super.getName(),bonus,fine,hardSalary,getSalary());
+        return String.format("\tID: %1s || Name: %15s || Bonus: %4s || Fine: %4s || HardSalary: %6s || totalSalary: %6s \n",super.getId(),super.getName(),bonus,dayOff*300,hardSalary,getSalary());
 
     }
 }
