@@ -15,6 +15,7 @@ public class MenuUSER {
         System.out.println("5.Hiện thị tài khoản đăng nhập");
         System.out.println("6.Hiển thị bảng lương");
         System.out.println("7.Đăng xuất");
+        System.out.println("Chọn thao tác:");
 
         int chooseMenu = scanner.nextInt();
         switch (chooseMenu) {
@@ -32,6 +33,9 @@ public class MenuUSER {
                     case "2":
                         staffView.editStatus();
                         break;
+                    default:
+                        System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
+                        new MenuUSER();
                 }
                 break;
             case 3:
@@ -45,6 +49,9 @@ public class MenuUSER {
                     case "2":
                         staffView.findByName();
                         break;
+                    default:
+                        System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
+                        new MenuUSER();
                 }
                 break;
             case 4:
@@ -66,11 +73,17 @@ public class MenuUSER {
                         System.out.println("===========================PartTime======================");
                         staffView.showListSalaryPart();
                         break;
+                    default:
+                        System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
+                        new MenuUSER();
                 }
 
             case 7:
                 new Main();
                 break;
+            default:
+                System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
+                new MenuUSER();
 
 
         }

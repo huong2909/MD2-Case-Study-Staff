@@ -16,7 +16,6 @@ public class StaffView {
     StaffController staffController = new StaffController();
     List<User> userListLogin = UserServiceIMPL.userListLogin;
     StaffServiceIMPL staffServiceIMPL = new StaffServiceIMPL();
-
     public void showListStaff() {
         System.out.println(staffController.showListStaff());
         System.out.println("Nhập quit để quay lại Menu");
@@ -91,7 +90,6 @@ public class StaffView {
         System.out.println("Nhập ID của nhân viên cần xóa");
         int id = Integer.parseInt(scanner.nextLine());
         staffController.deleteStaff(id);
-        System.out.println("Đã xóa thành công!!!");
         System.out.println("nhập quit để quay lại Menu");
         String backMenu = scanner.nextLine();
         if (backMenu.equalsIgnoreCase("quit")) {
@@ -109,18 +107,7 @@ public class StaffView {
         System.out.println("Nhập tên nhân viên cần kiểm tra");
         String name = scanner.nextLine();
         staffController.checkStatusByName(name);
-        System.out.println();
-        System.out.println(" Nhập quit để quay lại Menu ");
-        String backMenu = scanner.nextLine();
-        if (backMenu.equalsIgnoreCase("quit")) {
-            for (int i = 0; i < userListLogin.size(); i++) {
-                if (Role.RoleName.ADMIN.equals(userListLogin.get(i).getRoleName())) {
-                    new MenuADMIN();
-                } else {
-                    new MenuUSER();
-                }
-            }
-        }
+        new MenuADMIN();
     }
 
     public void editStaff() {
@@ -364,6 +351,8 @@ public class StaffView {
             }
         }
 
+    }
+    public void setupSalary(){
     }
 }
 

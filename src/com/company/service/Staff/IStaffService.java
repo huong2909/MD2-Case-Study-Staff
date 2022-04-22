@@ -3,7 +3,6 @@ package com.company.service.Staff;
 import com.company.model.Staff;
 import com.company.service.IServiceGeneric;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface IStaffService extends IServiceGeneric<Staff> {
@@ -26,4 +25,5 @@ public interface IStaffService extends IServiceGeneric<Staff> {
     void saveSalaryPart(Staff staff) ;
 
     List<Staff> findSalaryPart() ;
+    void setUpSalaryFull(int id, String name,int age,String country, String status, String workingType,int bonus, int fine, int hardSalary);
     }

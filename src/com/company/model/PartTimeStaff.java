@@ -21,7 +21,7 @@ public class PartTimeStaff extends Staff{
 
     @Override
     public String toString() {
-        return String.format("\tID: %1s || Name: %15s || housWork: %4s || Salary: %6s \n",super.getId(),super.getName(),hoursWork,getSalary());
+        return String.format("\tID: %1s || Name: %15s || housWork: %4s || totalSalary: %6s \n",super.getId(),super.getName(),hoursWork,getSalary());
 
     }
     

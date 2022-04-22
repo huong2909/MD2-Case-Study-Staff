@@ -13,14 +13,18 @@ public class Main {
         System.out.println("1.Đăng kí");
         System.out.println("2.Đăng nhập");
         System.out.println("Chọn thao tác:");
-        int chooseMenu = scanner.nextInt();
+        String chooseMenu = scanner.nextLine();
+
         switch (chooseMenu) {
-            case 1:
+            case "1":
                 userView.register();
                 break;
-            case 2:
+            case "2":
                 userView.login();
                break;
+            default:
+                System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
+                new Main();
 
         }
     }

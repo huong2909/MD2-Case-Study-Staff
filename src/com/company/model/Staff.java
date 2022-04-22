@@ -10,20 +10,6 @@ public class Staff implements Serializable {
     private String status;
     private String workingType;
 
-//    private int bonus;
-//    private int fine;
-//    private int hardSalary;
-//
-//    private int hoursWork;
-//
-//    public int getSalaryFull(int bonus,int fine,int hardSalary){
-//        return hardSalary+(bonus-fine);
-//    }
-//    public int getSalaryPart(int hoursWork){
-//        return hoursWork*100;
-//    }
-
-
     public Staff(int id, String name, int age, String country, String status, String workingType) {
         this.id = id;
         this.name = name;

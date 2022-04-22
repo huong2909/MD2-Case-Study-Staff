@@ -48,12 +48,15 @@ public class UserServiceIMPL implements IUserSevice {
 
     @Override
     public void delete(int id) {
+        String checkId = null;
         for (int i = 0; i < userList.size(); i++) {
             if (id==userList.get(i).getId()){
                 userList.remove(i);
+                System.out.println("Xóa thành công!!!");
             }
         }
-
+        if (checkId==null)
+            System.err.println("ID sai hoặc không tồn tại");
     }
     public static boolean existedByUsername(String username) {
         for (int i = 0; i < userList.size(); i++) {

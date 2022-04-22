@@ -3,7 +3,7 @@ package com.company.model;
 public class FullTimeStaff extends Staff{
     private int bonus;
     private int fine;
-    private int hardSalary;
+    private int  hardSalary;
 
 
     public FullTimeStaff(int id, String name, int age, String country, String status, String workingType, int bonus, int fine, int hardSalary) {
@@ -42,7 +42,7 @@ public class FullTimeStaff extends Staff{
 
     @Override
     public String toString() {
-        return String.format("\tID: %1s || Name: %15s || Bonus: %4s || Fine: %4s || HardSalary: %6s || Salary: %6s \n",super.getId(),super.getName(),bonus,fine,hardSalary,getSalary());
+        return String.format("\tID: %1s || Name: %15s || Bonus: %4s || Fine: %4s || HardSalary: %6s || totalSalary: %6s \n",super.getId(),super.getName(),bonus,fine,hardSalary,getSalary());
 
     }
 }

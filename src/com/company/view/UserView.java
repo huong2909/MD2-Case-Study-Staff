@@ -38,17 +38,6 @@ public class UserView {
             } while (name == null);
 
 
-//            String name;
-//            boolean checkName;
-//            while (true){
-//                name = scanner.nextLine();
-//                checkName = Pattern.matches("[a-z0-9_-]{8,}",name);
-//                if (!checkName){
-//                    System.err.println("Sai định dạng! Vui lòng nhập lại ");
-//                } else {
-//                    break;
-//                }
-//            }
             System.out.println("Nhập tên người dùng (tối thiểu 6 ký tự)");
             String username;
             boolean checkUsername;
@@ -93,12 +82,14 @@ public class UserView {
             Role.RoleName roleName = Role.RoleName.valueOf(scanner.nextLine());
             User user = new User(id, name, username, password, email, roleName);
             userController.createUser(user);
+            System.out.println("Đăng kí thành công!!!");
+            new Main();
 
-            System.out.println("Nhập phím bất kỳ để tiếp tục hoặc nhập quit để quay lại");
-            String backMenu = scanner.nextLine();
-            if (backMenu.equalsIgnoreCase("quit")) {
-                new Main();
-            }
+//            System.out.println("Nhập phím bất kỳ để tiếp tục hoặc nhập quit để quay lại");
+//            String backMenu = scanner.nextLine();
+//            if (backMenu.equalsIgnoreCase("quit")) {
+//                new Main();
+//            }
         }
     }
 
@@ -132,9 +123,6 @@ public class UserView {
 
         } while (passwordlogin == null);
 
-//        System.out.println("Nhập quyền sử dụng");
-//        Role.RoleName roleName = Role.RoleName.valueOf(scanner.nextLine());
-
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getUserName().equals(username) && userList.get(i).getPassword().equals(password) && userList.get(i).getRoleName().equals(Role.RoleName.ADMIN)) {
                 System.out.println("Chúc mừng " + userList.get(i).getRoleName() + " - " + userList.get(i).getName() + " đã đăng nhập thành công!!!");
@@ -166,13 +154,10 @@ public class UserView {
 
     public void deleteUser()  {
         System.out.println("Nhập ID");
-        int id = scanner.nextInt();
+        int id = Integer.parseInt(scanner.nextLine());
         userController.deleteUser(id);
-        System.out.println("Nhập quit để quay lại");
-        String backMenu = scanner.nextLine();
-        if (backMenu.equalsIgnoreCase("quit")) {
-            new MenuADMIN();
-        }
+        new MenuADMIN();
+
     }
     public void findUserById() {
         System.out.println("Nhập ID");
