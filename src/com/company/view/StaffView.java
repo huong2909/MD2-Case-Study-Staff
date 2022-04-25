@@ -18,7 +18,16 @@ public class StaffView {
     StaffServiceIMPL staffServiceIMPL = new StaffServiceIMPL();
     public void showListStaff() {
         System.out.println(staffController.showListStaff());
-        new Menu1();
+        System.out.println("Nhập quit để trở về menu");
+        String backMenu = scanner.nextLine();
+        if(backMenu.equalsIgnoreCase("quit")){
+            if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.ADMIN){
+                new Menu1();
+            } else if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.USER){
+                new Menu2();
+            }
+
+        }
 
     }
 
@@ -117,7 +126,16 @@ public class StaffView {
         System.out.println("Nhập tên nhân viên cần kiểm tra");
         String name = scanner.nextLine();
         staffController.checkStatusByName(name);
-        new Menu1();
+        System.out.println("Nhập quit để trở về menu");
+        String backMenu = scanner.nextLine();
+        if(backMenu.equalsIgnoreCase("quit")){
+            if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.ADMIN){
+                new Menu1();
+            } else if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.USER){
+                new Menu2();
+            }
+
+        }
     }
 
     public void editStaff() {
@@ -242,7 +260,16 @@ public class StaffView {
         System.out.println("Nhập ID");
         int id = Integer.parseInt(scanner.nextLine());
         staffController.findById(id);
-        new Menu1();
+        System.out.println("Nhập quit để trở về menu");
+        String backMenu = scanner.nextLine();
+        if(backMenu.equalsIgnoreCase("quit")){
+            if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.ADMIN){
+                new Menu1();
+            } else if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.USER){
+                new Menu2();
+            }
+
+        }
 
     }
 
@@ -251,16 +278,15 @@ public class StaffView {
         String name = scanner.nextLine();
         staffController.findByName(name);
         System.out.println();
-        System.out.println("Nhập quit để quay lại Menu");
+        System.out.println("Nhập quit để trở về menu");
         String backMenu = scanner.nextLine();
-        if (backMenu.equalsIgnoreCase("quit")) {
-            for (int i = 0; i < userListLogin.size(); i++) {
-                if (Role.RoleName.ADMIN.equals(userListLogin.get(i).getRoleName())) {
-                    new Menu1();
-                } else {
-                    new Menu2();
-                }
+        if(backMenu.equalsIgnoreCase("quit")){
+            if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.ADMIN){
+                new Menu1();
+            } else if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.USER){
+                new Menu2();
             }
+
         }
     }
 
@@ -268,7 +294,16 @@ public class StaffView {
         System.out.println("Nhập id: ");
         int id = Integer.parseInt(scanner.nextLine());
         staffController.editStatus(id);
-        new Menu1();
+        System.out.println("Nhập quit để trở về menu");
+        String backMenu = scanner.nextLine();
+        if(backMenu.equalsIgnoreCase("quit")){
+            if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.ADMIN){
+                new Menu1();
+            } else if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.USER){
+                new Menu2();
+            }
+
+        }
     }
 
     public void getWorkingType() {
@@ -285,7 +320,16 @@ public class StaffView {
                 staffController.getWorkingType(choose2);
                 break;
         }
-        new Menu1();
+        System.out.println("Nhập quit để trở về menu");
+        String backMenu = scanner.nextLine();
+        if(backMenu.equalsIgnoreCase("quit")){
+            if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.ADMIN){
+                new Menu1();
+            } else if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.USER){
+                new Menu2();
+            }
+
+        }
 
 
     }
@@ -336,7 +380,7 @@ public class StaffView {
                         }
                     }
                     int fine = Integer.parseInt(temp1);
-                    FullTimeStaff fullTimeStaff = new FullTimeStaff(staffList.get(i).getId(), staffList.get(i).getName(), staffList.get(i).getAge(), staffList.get(i).getCountry(), staffList.get(i).getStatus(), staffList.get(i).getWorkingType(), 1000, fine, 10000);
+                    FullTimeStaff fullTimeStaff = new FullTimeStaff(staffList.get(i).getId(), staffList.get(i).getName(), staffList.get(i).getAge(), staffList.get(i).getCountry(), staffList.get(i).getStatus(), staffList.get(i).getWorkingType(), 2000, fine, 15000);
 
                     staffController.createSalaryFull(fullTimeStaff);
                     System.out.println(staffController.showListSalaryFull());
@@ -351,7 +395,16 @@ public class StaffView {
 
     public void showListSalaryFull() {
         System.out.println(staffController.showListSalaryFull());
-        new Menu1();
+        System.out.println("Nhập quit để trở về menu");
+        String backMenu = scanner.nextLine();
+        if(backMenu.equalsIgnoreCase("quit")){
+            if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.ADMIN){
+                new Menu1();
+            } else if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.USER){
+                new Menu2();
+            }
+
+        }
 
     }
 

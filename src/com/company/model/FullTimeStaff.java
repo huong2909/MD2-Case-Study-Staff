@@ -42,7 +42,7 @@ public class FullTimeStaff extends Staff{
 
     @Override
     public String toString() {
-        return String.format("\tID: %1s || Name: %15s || Bonus: %4s || Fine: %4s || HardSalary: %6s || totalSalary: %6s \n",super.getId(),super.getName(),bonus,dayOff*300,hardSalary,getSalary());
+        return String.format("\tID: %1s || Tên: %15s || Thưởng: %4s || Phạt: %4s || Lương cứng: %6s || Tổng lương: %6s \n",super.getId(),super.getName(),bonus,dayOff*300,hardSalary,getSalary());
 
     }
 }

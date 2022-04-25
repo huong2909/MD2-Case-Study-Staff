@@ -3,7 +3,7 @@ package com.company.model;
 public class PartTimeStaff extends Staff{
     private int hoursWork;
     public double getSalary(){
-        return hoursWork*50;
+        return hoursWork*60;
     }
 
     public PartTimeStaff(int id, String name,int age,String country, String status, String workingType,int hoursWork) {
@@ -21,7 +21,7 @@ public class PartTimeStaff extends Staff{
 
     @Override
     public String toString() {
-        return String.format("\tID: %1s || Name: %15s || housWork: %4s || totalSalary: %6s \n",super.getId(),super.getName(),hoursWork,getSalary());
+        return String.format("\tID: %1s || Tên: %15s || Số giờ: %4s || Tổng lương: %6s \n",super.getId(),super.getName(),hoursWork,getSalary());
 
     }
     

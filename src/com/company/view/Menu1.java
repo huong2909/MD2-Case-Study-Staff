@@ -126,6 +126,9 @@ public class Menu1 {
                                 System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
                                 new Menu1();
                         }
+                    default:
+                        System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
+                        new Menu1();
          }
             case "2":
                 System.out.println("=====================USER MANAGER====================");
@@ -159,6 +162,7 @@ public class Menu1 {
                 } default:
                 System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
                 new Menu1();
+
 
         }
 

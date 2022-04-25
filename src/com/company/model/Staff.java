@@ -76,7 +76,7 @@ public class Staff implements Serializable {
 //                " || Status: " + status +
 //                " || WorkingType: " + workingType +
 //                ']'+"\n";
-        return String.format("\tID: %1s || Name: %15s || Age: %3s || Country: %12s || Status: %13s || WorkingType: %8s \n",id,name,age,country,status,workingType);
+        return String.format("\tID: %1s || Tên: %15s || Tuổi: %3s || Địa chỉ: %12s || Trạng thái: %13s || Hình thức: %8s \n",id,name,age,country,status,workingType);
 
     }
 }

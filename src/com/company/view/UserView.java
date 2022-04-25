@@ -17,7 +17,18 @@ public class UserView {
 
     public void showListUser() {
         System.out.println(userController.showListUser());
-        new Menu1();
+        System.out.println("Nhập quit để trở về menu");
+        String backMenu = scanner.next();
+        for (int i = 0; i < userList.size(); i++) {
+            if(backMenu.equalsIgnoreCase("quit")){
+                if (userList.get(i).getRoleName()== Role.RoleName.ADMIN){
+                    new Menu1();
+                } else if (userList.get(i).getRoleName()== Role.RoleName.USER){
+                    new Menu2();
+                }
+
+            }
+        }
     }
 
     public void register() {
@@ -157,8 +168,17 @@ public class UserView {
 
     public void showListUserLogin() {
         System.out.println(userController.showListUserLogin());
-        new Menu1();
-    }
+        System.out.println("Nhập quit để trở về menu");
+        String backMenu = scanner.nextLine();
+            if(backMenu.equalsIgnoreCase("quit")){
+                if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.ADMIN){
+                    new Menu1();
+                } else if (UserServiceIMPL.userListLogin.get(0).getRoleName()== Role.RoleName.USER){
+                    new Menu2();
+                }
+
+            }
+        }
 
     public void deleteUser()  {
         System.out.println("Nhập ID");
