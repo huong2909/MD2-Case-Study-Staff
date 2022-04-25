@@ -27,11 +27,15 @@ public class UserServiceIMPL implements IUserSevice {
 
     @Override
     public void findById(int id) {
+        Boolean checkId = false;
         for (int i = 0; i < userList.size(); i++) {
             if (id==userList.get(i).getId()){
                 System.out.println(userList.get(i));
+                checkId = true;
             }
         }
+        if (checkId==false)
+            System.err.println("ID không tồn tại");
     }
 
     @Override
@@ -48,15 +52,16 @@ public class UserServiceIMPL implements IUserSevice {
 
     @Override
     public void delete(int id) {
-        String checkId = null;
+        Boolean checkId = false;
         for (int i = 0; i < userList.size(); i++) {
             if (id==userList.get(i).getId()){
                 userList.remove(i);
                 System.out.println("Xóa thành công!!!");
+                checkId = true;
             }
         }
-        if (checkId==null)
-            System.err.println("ID sai hoặc không tồn tại");
+        if (checkId==false)
+            System.err.println("ID không tồn tại");
     }
     public static boolean existedByUsername(String username) {
         for (int i = 0; i < userList.size(); i++) {

@@ -2,10 +2,10 @@ package com.company.view;
 
 import java.util.Scanner;
 
-public class MenuADMIN {
+public class Menu1 {
     Scanner scanner = new Scanner(System.in);
     StaffView staffView = new StaffView();
-    public MenuADMIN()  {
+    public Menu1()  {
         System.out.println("=======================MANAGER=====================");
         System.out.println("1.Quản lý nhân viên");
         System.out.println("2.Quản lý người dùng");
@@ -37,6 +37,7 @@ public class MenuADMIN {
                     case "4":
                         System.out.println("1.Kiểm tra" + "\n" +
                                 "2.Thay đổi");
+                        System.out.println("Chọn thao tác");
                         String choose2 = scanner.nextLine();
                         switch (choose2) {
                             case "1":
@@ -47,7 +48,7 @@ public class MenuADMIN {
                                 break;
                             default:
                                 System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
-                                new MenuADMIN();
+                                new Menu1();
                         }
                         break;
                     case "5":
@@ -56,59 +57,76 @@ public class MenuADMIN {
                     case "6":
                         System.out.println("1.Tìm kiếm theo Id" + "\n" +
                                 "2.Tìm kiếm theo tên");
+                        System.out.println("Chọn thao tác");
                         String choose1 = scanner.nextLine();
                         switch (choose1) {
                             case "1":
                                 staffView.findById();
                                 break;
-                            case "2": //sao lại k ra nhỉ?
+                            case "2":
                                 staffView.findByName();
                                 break;
                             default:
                                 System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
-                                new MenuADMIN();
+                                new Menu1();
                         }
                         break;
                     case "7":
                         staffView.getWorkingType();
                         break;
                     case "8":
-
-                        System.out.println("1.Tính lương nhân viên Fulltime");
-                        System.out.println("2.Tính lương nhân viên Parttime");
-                        System.out.println("3.Hiển thị lương nhân viên FullTime");
-                        System.out.println("4.Hiển thị lương nhân viên PartTime");
-                        System.out.println("5.Chỉnh sửa lương Fulltime");
-
+                        System.out.println("1.FullTime");
+                        System.out.println("2.Parttime");
+                        System.out.println("Chọn thao tác");
                         String choose3 = scanner.nextLine();
                         switch (choose3){
                             case "1":
-                                staffView.salaryFull();
-                                break;
+                                System.out.println("1.Tính toàn bộ lương");
+                                System.out.println("2.Hiển thị bảng lương");
+                                System.out.println("3.Tính lương của nhân viên mới");
+                                System.out.println("4.Chỉnh sửa lương");
+                                System.out.println("Chọn thao tác");
+                                String choose4 = scanner.nextLine();
+                                switch (choose4){
+                                    case "1":
+                                        staffView.salaryFull();
+                                        break;
+                                    case "2":
+                                        System.out.println("========================FullTime=======================");
+                                        staffView.showListSalaryFull();
+                                        break;
+                                    case "3":
+                                        staffView.creatSalaryFull();
+                                        break;
+                                    case "4":
+                                      staffView.setupSalary();
+                                      break;
+                                    default:
+                                        System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
+                                        new Menu1();
+                                }
                             case "2":
-                                staffView.salaryPart();
-                                break;
-                            case "3":
-                                System.out.println("========================FullTime=======================");
-                                staffView.showListSalaryFull();
-                                break;
-                            case "4":
-                                System.out.println("===========================PartTime======================");
-                                staffView.showListSalaryPart();
-                                break;
-                            case "5":
-                                staffView.setupSalary();
-                                break;
+                                System.out.println("1.Tính toàn bộ lương");
+                                System.out.println("2.Hiển thị bảng lương");
+                                System.out.println("Chọn thao tác");
+                                String choose5 = scanner.nextLine();
+                                switch (choose5){
+                                    case "1":
+                                        staffView.salaryPart();
+                                        break;
+                                    case "2":
+                                        System.out.println("========================PartTime=======================");
+                                        staffView.showListSalaryPart();
+                                        break;
+                                    default:
+                                        System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
+                                        new Menu1();
+                                }
                             default:
                                 System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
-                                new MenuADMIN();
-
+                                new Menu1();
                         }
-                    default:
-                        System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
-                        new MenuADMIN();
-
-                }
+         }
             case "2":
                 System.out.println("=====================USER MANAGER====================");
                 System.out.println("1.Hiển thị tài khoản đăng nhập");
@@ -136,11 +154,11 @@ public class MenuADMIN {
                         break;
                     default:
                         System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
-                        new MenuADMIN();
+                        new Menu1();
 
                 } default:
                 System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
-                new MenuADMIN();
+                new Menu1();
 
         }
 

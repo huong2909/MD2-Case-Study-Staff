@@ -17,7 +17,7 @@ public class UserView {
 
     public void showListUser() {
         System.out.println(userController.showListUser());
-        new MenuADMIN();
+        new Menu1();
     }
 
     public void register() {
@@ -28,19 +28,19 @@ public class UserView {
             } else {
                 id = userList.get(userList.size() - 1).getId() + 1;
             }
-            System.out.println("Nhập họ tên( 8 chữ cái trở lên, chữ in hoa và không dấu cách)");
+
+            System.out.println("Nhập họ tên: ");
             String name;
             boolean checkName;
             while (true) {
                 name = scanner.nextLine();
-                checkName = Pattern.matches("[A-Z0-9_-]{8,}", name);
+                checkName = Pattern.matches("(.|\\s)*\\S(.|\\s)*", name);
                 if (!checkName) {
-                    System.err.println("Sai rồi!vui lòng nhập lại!");
+                    System.err.println("Không được để trống!! Vui lòng nhập lại");
                 } else {
                     break;
                 }
             }
-
 
             System.out.println("Nhập tên người dùng (tối thiểu 6 ký tự)");
             String username;
@@ -83,17 +83,25 @@ public class UserView {
                 }
             }
             System.out.println("Nhập quyền sử dụng ADMIN hoặc USER");
-            Role.RoleName roleName = Role.RoleName.valueOf(scanner.nextLine());
+            String role;
+
+            boolean checkRoleName;
+            while (true) {
+                role = scanner.nextLine();
+                checkRoleName = Pattern.matches("ADMIN|USER", role);
+                if (!checkRoleName) {
+                    System.err.println("Nhập sai!! Vui lòng nhập lại");
+                } else {
+                    break;
+                }
+            }
+            Role.RoleName roleName = Role.RoleName.valueOf(role);
             User user = new User(id, name, username, password, email, roleName);
             userController.createUser(user);
+
             System.out.println("Đăng kí thành công!!!");
             new Main();
 
-//            System.out.println("Nhập phím bất kỳ để tiếp tục hoặc nhập quit để quay lại");
-//            String backMenu = scanner.nextLine();
-//            if (backMenu.equalsIgnoreCase("quit")) {
-//                new Main();
-//            }
         }
     }
 
@@ -133,13 +141,13 @@ public class UserView {
 
                 User user = new User(userList.get(i).getId(), userList.get(i).getName(), userList.get(i).getUserName(), userList.get(i).getPassword(), userList.get(i).getEmail(), userList.get(i).getRoleName());
                 userController.createUserLogin(user);
-                new MenuADMIN();
+                new Menu1();
             } else if (userList.get(i).getUserName().equals(username) && userList.get(i).getPassword().equals(password) && userList.get(i).getRoleName().equals(Role.RoleName.USER)) {
                 System.out.println(" Chúc mừng " + userList.get(i).getRoleName() + " - " + userList.get(i).getName() + " đã đăng nhập thành công!!!");
 
                 User user = new User(userList.get(i).getId(), userList.get(i).getName(), userList.get(i).getUserName(), userList.get(i).getPassword(), userList.get(i).getEmail(), userList.get(i).getRoleName());
                 userController.createUserLogin(user);
-                new MenuUSER();
+                new Menu2();
             }
         }
         return false;
@@ -149,25 +157,21 @@ public class UserView {
 
     public void showListUserLogin() {
         System.out.println(userController.showListUserLogin());
-        System.out.println("Nhập quit để quay lại");
-        String backMenu = scanner.nextLine();
-        if (backMenu.equalsIgnoreCase("quit")) {
-            new MenuADMIN();
-        }
+        new Menu1();
     }
 
     public void deleteUser()  {
         System.out.println("Nhập ID");
         int id = Integer.parseInt(scanner.nextLine());
         userController.deleteUser(id);
-        new MenuADMIN();
+        new Menu1();
 
     }
     public void findUserById() {
         System.out.println("Nhập ID");
         int id = scanner.nextInt();
         userController.findById(id);
-        new MenuADMIN();
+        new Menu1();
         }
     }
 

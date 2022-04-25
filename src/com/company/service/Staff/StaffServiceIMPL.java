@@ -4,9 +4,8 @@ import com.company.config.ConfigReadAndWriteFile;
 import com.company.model.FullTimeStaff;
 import com.company.model.PartTimeStaff;
 import com.company.model.Staff;
-import com.company.view.MenuADMIN;
+import com.company.view.Menu1;
 
-import java.io.IOException;
 import java.util.List;
 
 public class StaffServiceIMPL implements IStaffService{
@@ -31,25 +30,20 @@ public class StaffServiceIMPL implements IStaffService{
     }
     @Override
     public void delete(int id) {
-        String checkName = null;
+        boolean checkID = false;
         for (int i = 0; i < staffList.size(); i++) {
+
             if (id==staffList.get(i).getId()){
-//                if (id==staffList2.get(i).getId()){
-//                    staffList2.remove(i);
-//                    findSalary();
-//                } else if (id==staffList1.get(i).getId()){
-//                    staffList1.remove(i);
-//                    findSalaryPart();
-//                }
                 staffList.remove(i);
+                checkID = true;
                 System.out.println("Đã xóa thành công!!!");
                 findAll();
 
             }
-
         }
-
-
+        if (checkID==false) {
+            System.err.println("ID không tồn tại");
+        }
         for (int i = 0; i < staffList1.size(); i++) {
             if (id==staffList1.get(i).getId()){
                 staffList1.remove(i);
@@ -61,9 +55,8 @@ public class StaffServiceIMPL implements IStaffService{
                 staffList2.remove(i);
                 findSalaryPart();
             }
-        } new MenuADMIN();
-        if (checkName==null)
-            System.err.println("ID sai hoặc không tồn tại");
+        } new Menu1();
+
 
     }
     @Override
@@ -97,10 +90,14 @@ public class StaffServiceIMPL implements IStaffService{
 
     @Override
     public void findById(int id) {
+        boolean checkID = false;
         for (int i = 0; i < staffList.size(); i++) {
             if (id==staffList.get(i).getId()){
                 System.out.println(staffList.get(i));
+                checkID = true;
             }
+        } if (checkID==false) {
+            System.err.println("ID không tồn tại");
         }
     }
 
@@ -120,14 +117,19 @@ public class StaffServiceIMPL implements IStaffService{
 
     @Override
     public void editStatus(int id) {
+        boolean checkID = false;
         for (int i = 0; i < staffList.size(); i++) {
             if (id == staffList.get(i).getId()) {
+                checkID = true;
                 if (staffList.get(i).getStatus().equalsIgnoreCase("đang làm việc")) {
                     staffList.get(i).setStatus("Nghỉ việc");
                 } else if (staffList.get(i).getStatus().equalsIgnoreCase("nghỉ việc")){
                     staffList.get(i).setStatus("Đang làm việc");
                 }
+                System.out.println("Thay đổi thành công!!!");
             }
+        } if (checkID==false) {
+            System.err.println("ID không tồn tại");
         }
 
     }
@@ -143,8 +145,20 @@ public class StaffServiceIMPL implements IStaffService{
 
     @Override
     public void saveSalaryFull(FullTimeStaff fullTimeStaff)  {
+//        staffList1.clear();
+//        staffList1.set(0,fullTimeStaff);
         staffList1.add(fullTimeStaff);
         new ConfigReadAndWriteFile<FullTimeStaff>().writeToFile(PATH1,staffList1);;
+    }
+    public void deleteSalary(){
+        for (int i = 0; i < staffList1.size(); i++) {
+            staffList1.clear();
+        }
+    }
+    public void deleteSalaryPart(){
+        for (int i = 0; i < staffList2.size(); i++) {
+            staffList2.clear();
+        }
     }
 
     @Override

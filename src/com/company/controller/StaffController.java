@@ -43,6 +43,7 @@ public class StaffController {
         return staffServiceIMPL.findSalary();
     }
     public void createSalaryFull(FullTimeStaff fullTimeStaff)  {
+
         staffServiceIMPL.saveSalaryFull(fullTimeStaff);
     }
     public List<PartTimeStaff> showListSalaryPart()  {
@@ -53,5 +54,11 @@ public class StaffController {
     }
     public void setUpSalaryFull(int id, int bonus, int fine, int hardSalary){
         staffServiceIMPL.setUpSalaryFull(id,bonus,fine,hardSalary);
+    }
+    public void deleteSalary(){
+        staffServiceIMPL.deleteSalary();
+    }
+    public void deleteSalaryPart(){
+        staffServiceIMPL.deleteSalaryPart();
     }
 }

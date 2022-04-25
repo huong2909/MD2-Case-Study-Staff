@@ -2,8 +2,8 @@ package com.company.view;
 
 import java.util.Scanner;
 
-public class MenuUSER {
-    MenuUSER() {
+public class Menu2 {
+    Menu2() {
         Scanner scanner = new Scanner(System.in);
         StaffView staffView = new StaffView();
         System.out.println("======STAFF MANAGE======");
@@ -13,8 +13,7 @@ public class MenuUSER {
         System.out.println("3.Tìm kiếm nhân viên");
         System.out.println("4.Phân loại nhân viên");
         System.out.println("5.Hiện thị tài khoản đăng nhập");
-        System.out.println("6.Hiển thị bảng lương");
-        System.out.println("7.Đăng xuất");
+        System.out.println("6.Đăng xuất");
         System.out.println("Chọn thao tác:");
 
         int chooseMenu = scanner.nextInt();
@@ -35,7 +34,7 @@ public class MenuUSER {
                         break;
                     default:
                         System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
-                        new MenuUSER();
+                        new Menu2();
                 }
                 break;
             case 3:
@@ -51,7 +50,7 @@ public class MenuUSER {
                         break;
                     default:
                         System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
-                        new MenuUSER();
+                        new Menu2();
                 }
                 break;
             case 4:
@@ -60,30 +59,13 @@ public class MenuUSER {
             case 5:
                 new UserView().showListUserLogin();
                 break;
-            case 6:
-                System.out.println("1.FullTime");
-                System.out.println("2.PartTime");
-                int choose4 = scanner.nextInt();
-                switch (choose4){
-                    case 1:
-                        System.out.println("========================FullTime=======================");
-                        staffView.showListSalaryFull();
-                        break;
-                    case 2:
-                        System.out.println("===========================PartTime======================");
-                        staffView.showListSalaryPart();
-                        break;
-                    default:
-                        System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
-                        new MenuUSER();
-                }
 
-            case 7:
+            case 6:
                 new Main();
                 break;
             default:
                 System.err.println("Thao tác sai!! vui lòng nhập lại!!!");
-                new MenuUSER();
+                new Menu2();
 
 
         }
